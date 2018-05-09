@@ -11,10 +11,10 @@ namespace WebAPI
     {
         public static SqlConnection ConexionSQL()
         {
-            SqlConnection ConectString = new SqlConnection(@"Data Source = LAPTOP-051\SQLEXPRESS;" +
-                                                               "Initial Catalog = mapsogss;" +
-                                                                "User id=sa;" +
-                                                                "Password=petrovendor;");
+            SqlConnection ConectString = new SqlConnection("Data Source=servidor;" +
+                                                                "Initial Catalog=PruebaWebApi;" + //Base de datos
+                                                                "User id=desarrollo;" +
+                                                                "Password=Contraseña;");
             return ConectString;
         }
         public static DataTable ConsultaSQL(string Query)

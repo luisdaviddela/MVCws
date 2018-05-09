@@ -7,13 +7,14 @@ namespace WebAPI
 {
     public class WebAPI
     {
-        public Usuario BuscarPorId(int IdUsuario)
+        public static Usuario BuscarPorId(int IdUsuario)
         {
             Usuario InformacionUsuario = new Usuario();
             DataTable _consulta = new DataTable();
             try
             {
-                _consulta = DBConn.ConsultaSQL("select * from Usuarios where idusuario = "+IdUsuario+"");
+                //_consulta = DBConn.ConsultaSQL("select * from Usuarios where idusuario = "+IdUsuario+"");
+                _consulta = DBConn.ConsultaSQL($"select * from Usuarios where idusuario = {IdUsuario}");
                 if (_consulta.Rows.Count>0)
                 {
                     InformacionUsuario.IdUsuario = Convert.ToInt32(_consulta.Rows[0].ItemArray[0]);
@@ -24,6 +25,10 @@ namespace WebAPI
             }
             catch (Exception)
             {
+                InformacionUsuario.IdUsuario =0;
+                InformacionUsuario.Nombre ="";
+                InformacionUsuario.Apellido = "";
+                InformacionUsuario.FechaNacimiento = new DateTime();
             }
             return InformacionUsuario;
         }

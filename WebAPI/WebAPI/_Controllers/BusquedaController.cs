@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,35 +13,38 @@ namespace WebAPI
     public class BusquedaController : Controller
     {
         // GET: api/<controller>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("{usuarioId}")]
+        public string Busqueda(int usuarioId)
         {
-            return new string[] { "value1", "value2" };
+            Usuario InformacionUsuario = new Usuario();
+            try
+            {
+                InformacionUsuario = WebAPI.BuscarPorId(usuarioId);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            var jsonConver = JsonConvert.SerializeObject(InformacionUsuario);
+            return jsonConver.ToString();
         }
 
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<controller>
         [HttpPost]
-        public void Post([FromBody]string value)
+        public string Nuevo([FromBody]Materia materia)
         {
-        }
+            Usuario InformacionUsuario = new Usuario();
+            try
+            {
+                //InformacionUsuario = WebAPI.BuscarPorId(usuarioId);
+            }
+            catch (Exception ex)
+            {
 
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+                throw ex;
+            }
+            var jsonConver = JsonConvert.SerializeObject(InformacionUsuario);
+            return jsonConver.ToString();
         }
     }
 }
